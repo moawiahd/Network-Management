@@ -1,0 +1,17 @@
+Dive into the world of SNMP SMIv2 data modeling with this hands-on assignment. The goal is to create an SNMP MIB module, named ID-xxxxxx (replace 'xxxxxx' with your student ID), enabling efficient management (querying and manipulation) of the firewall table on a machine.
+
+Project Details:
+
+Objective: Acquire hands-on experience with SMIv2 data modeling language to write an SNMP MIB module for firewall table management.
+Problem Statement: Develop an SNMP MIB module that allows querying and manipulation of firewall rules using SNMP.
+Requirements:
+The module resides under the enterprises node, descending from the node nes470(9000).
+Each firewall table entry contains information such as Source/Destination MAC addresses, Source/Destination IP addresses, Source/Destination TCP/UDP port numbers, Protocol type (TCP, UDP, or ICMP), Action (accept, drop, or reject), and the number of matched packets.
+SNMP manager can retrieve all data from the firewall table.
+SNMP manager can modify all data in the firewall table, excluding the number of matched packets for a given rule.
+Managed objects have appropriate access permissions and data types.
+The module conforms to the SMIv2 RFC (RFC 2578).
+Validation using the smilint tool with severity level 4 produces no errors and no warnings.
+Hints:
+Start with and build upon the skeletal MIB module presented in Section 5.7 of RFC 2578.
+Explore and mimic existing standard MIB modules, such as the IETF's interfaces MIB module.
