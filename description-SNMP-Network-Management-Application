@@ -1,0 +1,26 @@
+Immerse yourself in the realm of network management with this Python script designed as a minimalist SNMP network management application. The application utilizes Easy SNMP Python APIs to interrogate an SNMP agent for ARP cache information and displays it in a well-formatted manner.
+
+Project Details:
+
+Objective: Develop a Python script for network management using SNMP operations provided by Easy SNMP Python APIs.
+Problem Statement: Create a minimalist network management application that queries an SNMP agent for ARP cache information and presents it in a clear and organized format.
+
+Requirements:
+The script accepts two command-line arguments: the read-only community string of the agent (e.g., public) and the IP address of the target machine/device where the agent is running (e.g., 192.168.1.101).
+SNMP requests are sent to the SNMP agent, retrieving information about the ARP cache table on the router.
+Display on the standard output the IP address, corresponding MAC address, interface, and type of mapping in a well-formatted table.
+Utilize the Easy SNMP methods get and get next only, excluding walk, get bulk, or bulkwalk.
+Use only the Python Standard Library, with the exception of the easysnmp package.
+
+Output Format:
+IP Address    MAC Address        Interface          Mapping Type
+------------  -----------------  ----------------   ------------
+10.0.2.2      52:54:00:12:35:02  GigabitEthernet1   Dynamic
+192.168.1.1   e8:6e:44:19:aa:38  GigabitEthernet3   Dynamic
+10.0.2.15     08:00:27:48:bb:1f  GigabitEthernet1   Static
+192.168.1.19  08:00:27:eb:7e:1f  GigabitEthernet3   Static
+...
+
+Hints:
+Focus on the ipNetToPhysicalTable within the IP-MIB MIB module.
+Avoid assumptions about fixed data; consider dynamic changes across devices and over time.
