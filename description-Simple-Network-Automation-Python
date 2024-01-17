@@ -1,0 +1,27 @@
+Embark on a journey into network automation with this Python script designed for minimalistic yet effective interaction with a Cisco router's ARP cache. The objective is to develop a command-line network automation program that simplifies obtaining and displaying the ARP cache table in a well-formatted manner.
+
+Project Details:
+
+Objective: 
+Develop a Python script for network automation using the CLI.
+Problem Statement: The script sends commands to a Cisco router, retrieves the ARP cache table, and displays the information in a clear and organized format.
+
+Requirements:
+Accepts the router's IP address as a command-line argument (e.g., python3 ID-xxxxxx.py 192.168.1.101).
+Executed on a Linux machine.
+Utilizes the netmiko package for communication with the Cisco router.
+Displays ARP cache details, including IP address, MAC address, interface, age, and mapping type.
+
+Output Format:
+IP Address    MAC Address        Interface          Age    Mapping Type
+------------  -----------------  -----------------  ---    ------------
+10.0.2.2      52:54:00:12:35:02  GigabitEthernet1   5      Dynamic
+192.168.1.1   e8:6e:44:19:aa:38  GigabitEthernet3   0      Dynamic
+10.0.2.15     08:00:27:48:bb:1f  GigabitEthernet1   -      Static
+192.168.1.19  08:00:27:eb:7e:1f  GigabitEthernet3   -      Static
+...
+
+
+Library Usage:
+Only Python Standard Library is allowed, except for the netmiko package.
+Explore the simplicity and effectiveness of this network automation script as you delve into the fundamentals of CLI-based interaction with Cisco routers.
