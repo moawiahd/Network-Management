@@ -1,0 +1,138 @@
+ID-139912-133124 DEFINITIONS ::= BEGIN
+
+IMPORTS
+MODULE-IDENTITY, OBJECT-TYPE, NOTIFICATION-TYPE, Counter32, Integer32, IpAddress, enterprises FROM SNMPv2-SMI
+MODULE-COMPLIANCE, OBJECT-GROUP FROM SNMPv2-CONF
+PhysAddress FROM SNMPv2-TC;
+
+fireWallMIP MODULE-IDENTITY
+	LAST-UPDATED "202304061123Z"
+	ORGANIZATION "IETF SNMPv2 Working Group"
+	CONTACT-INFO
+		"	Moawiah AL-DOUM - 139912
+			mtaldoum19@cit.just.edu.jo
+			Aya AL-Anatri - 133124
+			amalantaree18@cit.just.edujo
+		"
+	DESCRIPTION
+		" This module defines a firewall table that contains entry for each firewall rule. "
+	REVISION	"202304061123Z"
+	DESCRIPTION
+		" This module is compliant with RFC 2578. "
+	REVISION	"202304051200Z"
+	DESCRIPTION
+		" LAST TIME REVISED "
+	::= { nes470 30 }
+
+
+nes470 OBJECT IDENTIFIER ::= { enterprises 9000 }
+
+
+fireWallTable OBJECT-TYPE
+	SYNTAX SEQUENCE OF FireWallEntry
+	MAX-ACCESS not-accessible
+	STATUS current
+	DESCRIPTION
+		" List of entries that shows : Source MAC address,Destination MAC address,Source IP address,Destination IP address,Source TCP/UDP port number,Destination TCP/UDP port number,Protocol type,Action, and number of packets matched. "
+	::= { nes470 1 }
+	
+fireWallEntry OBJECT-TYPE
+	SYNTAX FireWallEntry
+	MAX-ACCESS not-accessible
+	STATUS current
+	DESCRIPTION
+		" An entry containing management information applicable to a
+particular FireWall entries. "
+	INDEX	{ sIpAddress, dIpAddress, sMacAddress, dMacAddress }
+	::= { fireWallTable 1 }
+	
+FireWallEntry ::= SEQUENCE {
+sMacAddress PhysAddress,
+dMacAddress PhysAddress,
+sIpAddress IpAddress,
+dIpAddress IpAddress,
+sPortNumber Integer32,
+dPortNumber Integer32,
+protocolType INTEGER,
+action INTEGER,
+nPackets Counter32
+}	
+	
+sMacAddress OBJECT-TYPE
+	SYNTAX PhysAddress ( SIZE(6) )
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Source MAC ADDRESS "
+	::= { fireWallEntry 1 }
+	
+dMacAddress OBJECT-TYPE
+	SYNTAX PhysAddress ( SIZE(6) )
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Destination MAC ADDRESS "
+	::= { fireWallEntry 2 }
+	
+sIpAddress OBJECT-TYPE
+	SYNTAX IpAddress
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Source IP ADDRESS "
+	::={ fireWallEntry 3 }
+	
+dIpAddress OBJECT-TYPE
+	SYNTAX IpAddress
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Destination IP ADDRESS "
+	::={ fireWallEntry 4 }
+	
+sPortNumber OBJECT-TYPE
+	SYNTAX Integer32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Source PORT NUMBER "
+	::={ fireWallEntry 5 }
+	
+dPortNumber OBJECT-TYPE
+	SYNTAX Integer32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Destination PORT NUMBER "
+	::={ fireWallEntry 6 }
+
+protocolType OBJECT-TYPE
+	SYNTAX INTEGER { tcp(6), udp(17), icmp(1) }
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Protocol type: one of TCP, UDP, or ICMP "
+	::= { fireWallEntry 7 }
+	
+
+	
+action OBJECT-TYPE
+	SYNTAX INTEGER { accept(1), reject(2), drop(3) }
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Action: one of accept, drop, or reject "
+	::={ fireWallEntry 8 }
+	
+
+	
+nPackets OBJECT-TYPE
+	SYNTAX Counter32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		" Number of packets that have matched this rule/entry "
+	::={ fireWallEntry 9 }
+
+
+END
