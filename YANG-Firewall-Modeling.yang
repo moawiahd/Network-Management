@@ -1,0 +1,100 @@
+module ID-139912 {
+	yang-version 1.1;
+	namespace "urn:example:system";
+	prefix "sys";
+	import ietf-yang-types{
+		prefix yang;
+	}
+	import ietf-inet-types{
+		prefix inet;
+	}
+	organization " Jordan University Of Science And Technology. ";
+	contact " Moawiah AL-Doum - 139912 , Aya AL-Antari - 133124. ";
+	description
+		" yang module represinting firewall table. ";
+	revision 2023-05-28 {
+		description " Final revision. ";
+	}
+	container fireWallTable 
+	{ 
+		list table {
+			key "sMacAddr dMacAddr sIPAddr dIPAddr sPort dPort protocol";
+			config true;
+      			description "Firewall entry.";
+      			leaf sMacAddr 
+      			{
+      				type yang:mac-address;
+      				mandatory true;
+      				description
+      					" Mac address of the source. ";
+      			}
+      			leaf dMacAddr
+      			{
+      				type yang:mac-address;
+      				mandatory true;
+      				description
+      					" Mac address of the destination. ";
+      			}
+      			leaf sIPAddr
+      			{
+      				type inet:ipv4-address;
+      				mandatory true;
+      				description
+      					" IP address of the source. ";
+      			}
+      			leaf dIPAddr 
+      			{
+      				type inet:ipv4-address;
+      				mandatory true;
+      				description
+      					" IP address of the destination. ";
+      			}
+      			leaf sPort 
+      			{
+      				type inet:port-number;
+      				mandatory true;
+      				description
+      					" Port number of the source. ";
+      			}
+			leaf dPort 
+      			{
+      				type inet:port-number;
+      				mandatory true;
+      				description
+      					" Port number of the destination. ";
+      			}
+      			leaf protocol 
+      			{
+      				type enumeration {
+      					enum tcp;
+      					enum udp;
+      					enum icmp;
+      				}
+      				mandatory true;
+      				description
+      					" Protocol type: TCP, UDP, or ICMP. ";
+      			}
+      			leaf action 
+      			{
+      				type enumeration {
+          				enum accept;
+          				enum drop;
+          				enum reject;
+        			}
+      				mandatory true;
+      				description
+      					" Action: one of accept, drop, or reject. ";
+      			}
+      			leaf nPackets 
+      			{
+      				type yang:counter64;
+      				mandatory true;
+        			config false;
+        			description 
+        				" Number of packets that have matched this rule/entry. ";
+      			}		
+		
+		}
+	
+	}
+}
