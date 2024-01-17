@@ -1,0 +1,21 @@
+Description:
+
+Explore the world of YANG data modeling with this project focused on re-implementing the firewall table model. Utilizing YANG in place of SMIv2, this project enhances flexibility and efficiency in representing firewall rules.
+
+Project Details:
+
+Objective: 
+Gain hands-on experience with YANG data modeling for firewall table representation.
+  
+Key Features:
+Define firewall rules with details like Source/Destination MAC addresses, Source/Destination IP addresses, TCP/UDP port numbers, Protocol type (TCP, UDP, or ICMP), Action (accept, drop, or reject), and matched packet count.
+Enable RESTCONF client to retrieve and modify data in the firewall table, excluding the matched packet count for a given rule.
+Ensure all information/data nodes are mandatory, with appropriate data types and classifications (configuration or state data).
+Conform to YANG 1.1 RFC standards.
+Validate the model using the pyang tool to ensure a clean structure without errors or warnings.
+  
+Hints:
+Leverage YANG list data nodes for constructing a table.
+Start with the provided simple example-system YANG module, building upon it.
+Investigate and draw inspiration from existing standard YANG modules like IETF's or OpenConfig's interfaces.
+Use pyang --tree-help for a comprehensive explanation of symbols in the tree output.
